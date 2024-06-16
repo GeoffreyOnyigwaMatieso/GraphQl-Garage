@@ -14,6 +14,10 @@ const resolvers = {
         reviews() {
             return db.reviews
         },
+        reviewById(_,args){
+            return db.reviews.find((review)=> review.id === args.id)
+
+        },
         authors(){
             return db.authors
         }
