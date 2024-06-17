@@ -11,22 +11,26 @@ const resolvers = {
         games() {
             return db.games
         },
+
+        game(_,args){
+            return db.games.find((game)=> game.id === args.id)
+        },
+
+        authors(){
+            return db.authors
+        },
+        author(_,args){
+            return db.authors.find((author)=> author.id === args.id)
+        },
+
         reviews() {
             return db.reviews
         },
-        reviewById(_,args){
+        review(_,args){
             return db.reviews.find((review)=> review.id === args.id)
 
         },
-        reviewBygameId(_,args){
-            return db.games.find((game)=> game.id === args.id)
-        }, 
-        reviewByauthorId(_,args){
-            return db.authors.find((author)=> author.id === args.id)
-        },
-        authors(){
-            return db.authors
-        }
+        
     }
 }
 
@@ -37,7 +41,7 @@ const server = new ApolloServer({
 });
 
 const {url} = await startStandaloneServer(server, {
-    listen: { port: 4000 }
+    listen: { port: 4001 }
 });
 
 console.log(`🚀 Server ready at ${url}`);
